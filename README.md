@@ -1,19 +1,23 @@
 # DeployerDock: A Self-Hosted Deployment Platform
-<img width="1440" height="900" alt="Screenshot 2025-07-12 at 4 40 34 PM" src="https://github.com/user-attachments/assets/d98a37e5-da45-469c-8933-555f0aec2766" />
 
-----------
+<img width="1440" height="900" alt="DeployerDock Demo" src="https://github.com/user-attachments/assets/d98a37e5-da45-469c-8933-555f0aec2766" />
+
+---
 
 DeployerDock is a full-stack, self-hosted deployment system. It allows users to deploy frontend sites directly from a Git repository by running containerized builds, storing output on S3, and serving via a custom reverse proxy.
 
+## Demo
+
+Watch the project demo: https://youtu.be/8wOVULzj8PA
+
 ## Features
 
-- Direct deployments using Git URL - no extra setup needed
-- Dockerized build server for isolated builds
-- Static file hosting on S3 or S3-compatible storage
-- Reverse proxy for routing requests like `project-id.localhost:8000`
-- Dedicated log server for real-time build logs
-- Modular architecture and monorepo-ready
-  
+* Direct deployments using Git URL - no extra setup needed
+* Dockerized build server for isolated builds
+* Static file hosting on S3 or S3-compatible storage
+* Reverse proxy for routing requests like `project-id.localhost:8000`
+* Dedicated log server for real-time build logs
+* Modular architecture and monorepo-ready
 
 ### Flow:
 
@@ -25,24 +29,24 @@ DeployerDock is a full-stack, self-hosted deployment system. It allows users to 
 
 ## Repository Structure
 
-- build-server         # Docker Image - build handler
-- deployerdock-web     # Next.js frontend UI and api handling
-- logs-server          # Real-time log stream server
-- s3-reverse-proxy     # Custom proxy to route project access via hostname
+* build-server         # Docker Image - build handler
+* deployerdock-web     # Next.js frontend UI and api handling
+* logs-server          # Real-time log stream server
+* s3-reverse-proxy     # Custom proxy to route project access via hostname
 
 ## Getting Started (Local Development)
 
 ### Prerequisites
 
-- Docker
-- Node.js (v16+)
-- AWS CLI or mock S3 (e.g., LocalStack)
+* Docker
+* Node.js (v16+)
+* AWS CLI or mock S3 (e.g., LocalStack)
 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/pushpitjain2006/DeployerDockV2.git
-cd deployerdockV2
+git clone https://github.com/PrathamJain2525/DeployerDock.git
+cd DeployerDock
 ```
 
 2. Build and Run the Build Server
@@ -52,6 +56,7 @@ cd build-server
 docker build -t build-server
 docker run -p 9090:9090 build-server
 ```
+
 3. Run the Logs Server
 
 ```bash
@@ -59,31 +64,39 @@ cd ../logs-server
 npm install
 node index.js
 ```
+
 4. Start the Frontend
+
 ```bash
 cd ../deployerdock-web
 npm install
 npm run dev
 ```
+
 5. Start the Reverse Proxy
+
 ```bash
 cd ../s3-reverse-proxy
 npm install
 node index.js
 ```
+
 6. Access the Platform
-- Open your browser at http://localhost:3000
+
+* Open your browser at http://localhost:3000
 
 Example Flow
-- Populate the .env files
-- Input GitHub URL: https://github.com/you/repo
-- Login into the system
-- The build output is saved to S3: bucketName/_outputs/{project-id}/index.html
-- The reverse proxy serves it at: http://project-id.localhost:8000
+
+* Populate the .env files
+* Input GitHub URL: https://github.com/you/repo
+* Login into the system
+* The build output is saved to S3: bucketName/_outputs/{project-id}/index.html
+* The reverse proxy serves it at: http://project-id.localhost:8000
 
 Tech Stack
-- Frontend: Next.js (React)
-- Build Logic: Docker + Node.js
-- Logs: Custom Node.js server (WebSocket i.e. Socket.io)
-- Hosting: AWS S3 (or compatible alternatives)
-- Reverse Proxy: Custom-built Node.js server using http-proxy library
+
+* Frontend: Next.js (React)
+* Build Logic: Docker + Node.js
+* Logs: Custom Node.js server (WebSocket i.e. Socket.io)
+* Hosting: AWS S3 (or compatible alternatives)
+* Reverse Proxy: Custom-built Node.js server using http-proxy library

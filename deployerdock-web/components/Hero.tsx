@@ -1,12 +1,21 @@
 "use client";
+
 import React from "react";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, GitBranch, Globe, Zap } from "lucide-react";
+import {
+  ArrowRight,
+  GitBranch,
+  Globe,
+  PlayCircle,
+  Zap,
+} from "lucide-react";
 import { Card, CardContent } from "./ui/card";
 import { Badge } from "@/components/ui/badge";
-import { redirect } from "next/navigation";
 
 const Hero = () => {
+  const router = useRouter();
+
   return (
     <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto text-center">
@@ -20,18 +29,34 @@ const Hero = () => {
               at lightning speed.
             </span>
           </h1>
+
           <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             From Git to live in seconds. No config. No stress.
           </p>
-          <Button
-            size="lg"
-            onClick={() => {
-              redirect("/dashboard");
-            }}
-            className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg px-8 py-6 rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
-          >
-            Get Started <ArrowRight className="ml-2 w-5 h-5" />
-          </Button>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            {/* Get Started */}
+            <Button
+              size="lg"
+              onClick={() => router.push("/dashboard")}
+              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-lg px-8 py-6 rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 hover:scale-105"
+            >
+              Get Started
+              <ArrowRight className="ml-2 w-5 h-5" />
+            </Button>
+
+            {/* Try it */}
+            <Button
+              size="lg"
+              variant="outline"
+              onClick={() => router.push("/demo/configure")}
+              className="text-lg px-8 py-6 rounded-xl border-2 border-purple-300 dark:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-all duration-300 hover:scale-105"
+            >
+              <PlayCircle className="mr-2 h-5 w-5 text-purple-600" />
+              Try it
+            </Button>
+          </div>
         </div>
 
         {/* Hero Mockup */}
@@ -44,6 +69,7 @@ const Hero = () => {
                   <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
                   <div className="w-3 h-3 bg-green-500 rounded-full"></div>
                 </div>
+
                 <Badge
                   variant="secondary"
                   className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-100"
@@ -51,6 +77,7 @@ const Hero = () => {
                   Deployed
                 </Badge>
               </div>
+
               <div className="space-y-4">
                 <div className="flex items-center space-x-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
                   <GitBranch className="w-5 h-5 text-blue-500" />
@@ -58,10 +85,14 @@ const Hero = () => {
                     git push origin main
                   </span>
                 </div>
+
                 <div className="flex items-center space-x-4 p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
                   <Zap className="w-5 h-5 text-yellow-500" />
-                  <span className="text-sm font-mono">Building...</span>
+                  <span className="text-sm font-mono">
+                    Building...
+                  </span>
                 </div>
+
                 <div className="flex items-center space-x-4 p-4 bg-green-100 dark:bg-green-900 rounded-lg">
                   <Globe className="w-5 h-5 text-green-500" />
                   <span className="text-sm font-mono">
